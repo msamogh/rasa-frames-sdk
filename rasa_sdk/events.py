@@ -47,6 +47,13 @@ def SlotSet(
 
 
 # noinspection PyPep8Naming
+def FrameCreated(
+    slots: Dict[Text, Any], timestamp: Optional[float] = None
+) -> EventType:
+    return {"slots": slots, "timestamp": timestamp}
+
+
+# noinspection PyPep8Naming
 def Restarted(timestamp: Optional[float] = None) -> EventType:
     return {"event": "restart", "timestamp": timestamp}
 

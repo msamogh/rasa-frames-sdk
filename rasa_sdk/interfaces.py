@@ -16,6 +16,7 @@ class Tracker:
         return Tracker(
             state.get("sender_id"),
             state.get("slots", {}),
+            state.get("frames", {}),
             state.get("latest_message", {}),
             state.get("events"),
             state.get("paused"),
@@ -28,6 +29,7 @@ class Tracker:
         self,
         sender_id: Text,
         slots: Dict[Text, Any],
+        frames: Dict[Text, Any],
         latest_message: Optional[Dict[Text, Any]],
         events: List[Dict[Text, Any]],
         paused: bool,
@@ -43,6 +45,8 @@ class Tracker:
         self.sender_id = sender_id
         # slots that can be filled in this domain
         self.slots = slots
+
+        self.frames = frames
 
         self.followup_action = followup_action
 
@@ -67,6 +71,7 @@ class Tracker:
         return {
             "sender_id": self.sender_id,
             "slots": self.slots,
+            "frames": self.frames,
             "latest_message": self.latest_message,
             "latest_event_time": latest_event_time,
             "paused": self.is_paused(),
@@ -139,6 +144,7 @@ class Tracker:
         return Tracker(
             self.sender_id,
             copy.deepcopy(self.slots),
+            copy.deepcopy(self.frames),
             copy.deepcopy(self.latest_message),
             copy.deepcopy(self.events),
             self._paused,
