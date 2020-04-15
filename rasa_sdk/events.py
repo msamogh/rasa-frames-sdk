@@ -50,7 +50,7 @@ def SlotSet(
 def FrameCreated(
     slots: Dict[Text, Any], timestamp: Optional[float] = None
 ) -> EventType:
-    return {"slots": slots, "timestamp": timestamp}
+    return {"event": "create_frame", "slots": slots, "timestamp": timestamp}
 
 
 # noinspection PyPep8Naming
